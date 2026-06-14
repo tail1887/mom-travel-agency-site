@@ -1,56 +1,79 @@
-import { BookOpenText, Quote, UserRoundCheck } from 'lucide-react'
-import { ConsultationCTA } from '../components/ConsultationCTA'
-import { ProductCard } from '../components/ProductCard'
-import { ProductDetailPreview } from '../components/ProductDetailPreview'
+import { BookOpenText, MessageCircle, Quote, UserRoundCheck } from 'lucide-react'
 import { PrototypeNav } from '../components/PrototypeNav'
-import { TrustFooter } from '../components/TrustFooter'
-import { sampleProducts } from '../data/sampleProducts'
+import { agencyInfo, sampleProducts } from '../data/sampleProducts'
+
+const stories = [
+  {
+    title: '긴 이동일을 편하게 보내는 일정 배치',
+    text: '장거리 여행은 볼거리보다 리듬이 먼저입니다. 이동 다음 날은 핵심 일정과 휴식 시간을 함께 배치합니다.',
+  },
+  {
+    title: '처음 가는 인도에서 가장 많이 묻는 것',
+    text: '식사, 화장실, 이동 거리, 비자 준비처럼 고객이 실제로 걱정하는 항목을 먼저 설명합니다.',
+  },
+  {
+    title: '순례길은 거리보다 페이스가 중요합니다',
+    text: '하루 걷는 시간, 쉬는 지점, 짐 운반 여부가 만족도를 크게 바꿉니다.',
+  },
+]
 
 export function ContentStory() {
   return (
-    <main className="concept-page story-theme">
+    <main className="concept-page story-page">
       <PrototypeNav current="story" />
-      <section className="story-hero">
-        <div className="story-image">
-          <img src={sampleProducts[2].image} alt="여행 이야기 대표 이미지" />
-        </div>
-        <div className="story-copy">
-          <span className="eyebrow">E안 · 콘텐츠/스토리형</span>
-          <h1>여행을 다녀온 사람의 이야기로 신뢰를 쌓습니다</h1>
-          <p>후기, 여행지 소개, 인솔자 설명을 통해 상품 문의로 자연스럽게 이어지는 방향입니다.</p>
-          <ConsultationCTA title="이야기를 읽고 상담하기" />
-        </div>
-      </section>
-      <section className="story-panels">
-        <article>
-          <BookOpenText size={24} aria-hidden="true" />
-          <h2>여행지 이야기</h2>
-          <p>처음 가는 지역의 분위기, 이동 거리, 준비물을 쉽게 설명합니다.</p>
-        </article>
-        <article>
-          <Quote size={24} aria-hidden="true" />
-          <h2>고객 후기</h2>
-          <p>다녀온 고객의 말로 일정의 장점과 불안 해소 포인트를 보여줍니다.</p>
-        </article>
-        <article>
-          <UserRoundCheck size={24} aria-hidden="true" />
-          <h2>인솔자 노트</h2>
-          <p>전문가의 시선으로 난이도, 계절, 현지 상황을 안내합니다.</p>
-        </article>
-      </section>
-      <section className="editorial-section">
+      <section className="story-cover">
         <div>
-          <span className="eyebrow">이번 달 이야기</span>
-          <h2>인도 여행 전, 긴 이동일을 편하게 보내는 법</h2>
+          <span className="eyebrow">E안 · 콘텐츠/스토리형</span>
+          <h1>상품보다 먼저, 여행을 이해하게 만듭니다</h1>
+          <p>후기, 인솔자 노트, 여행지 설명을 먼저 읽고 자연스럽게 상품 상담으로 이어지는 매거진형 구조입니다.</p>
+          <a href="#kakao">
+            <MessageCircle size={18} aria-hidden="true" />
+            이야기 읽고 상담하기
+          </a>
+        </div>
+        <img src={sampleProducts[2].image} alt="스토리형 여행 이미지" />
+      </section>
+
+      <section className="story-grid">
+        <article className="story-lead">
+          <Quote size={34} aria-hidden="true" />
+          <h2>“어디를 가느냐보다 누구와 어떻게 가느냐가 더 중요했습니다.”</h2>
+          <p>고객 후기와 인솔자 설명을 전면에 두어 신뢰를 먼저 쌓습니다.</p>
+        </article>
+        {stories.map((story) => (
+          <article key={story.title}>
+            <BookOpenText size={24} aria-hidden="true" />
+            <h2>{story.title}</h2>
+            <p>{story.text}</p>
+          </article>
+        ))}
+      </section>
+
+      <section className="guide-note">
+        <div>
+          <UserRoundCheck size={28} aria-hidden="true" />
+          <h2>인솔자 노트</h2>
           <p>
-            장거리 이동이 많은 여행은 일정표보다 리듬이 중요합니다. 이동 다음 날은 핵심 관광과 휴식
-            시간을 함께 배치해야 만족도가 높습니다.
+            운영자가 자주 글을 쓰지 않아도 유지되도록, 핵심 여행지별 고정 설명과 대표 후기를 조합하는
+            구조입니다.
           </p>
         </div>
-        <ProductCard product={sampleProducts[1]} compact />
+        <div className="related-products">
+          {sampleProducts.slice(0, 2).map((product) => (
+            <a key={product.id} href="#kakao">
+              <img src={product.image} alt={`${product.title} 이미지`} />
+              <span>{product.category}</span>
+              <strong>{product.title}</strong>
+            </a>
+          ))}
+        </div>
       </section>
-      <ProductDetailPreview product={sampleProducts[1]} heading="콘텐츠에서 연결되는 상품 상세" />
-      <TrustFooter />
+
+      <footer className="story-footer">
+        <strong>{agencyInfo.name}</strong>
+        <span>{agencyInfo.phone}</span>
+        <span>{agencyInfo.hours}</span>
+      </footer>
     </main>
   )
 }

@@ -1,46 +1,80 @@
-import { Filter, Search } from 'lucide-react'
-import { ConsultationCTA } from '../components/ConsultationCTA'
-import { ProductCard } from '../components/ProductCard'
-import { ProductDetailPreview } from '../components/ProductDetailPreview'
+import { CalendarDays, Filter, Search, SlidersHorizontal } from 'lucide-react'
 import { PrototypeNav } from '../components/PrototypeNav'
-import { TrustFooter } from '../components/TrustFooter'
-import { sampleProducts } from '../data/sampleProducts'
+import { agencyInfo, sampleProducts } from '../data/sampleProducts'
 
-const categories = ['전체', '문화탐방', '테마여행', '성지순례', '출발확정']
+const filters = ['출발확정', '상담가', '성지순례', '걷기 적음', '소규모']
 
 export function ProductMarketplace() {
   return (
-    <main className="concept-page marketplace-theme">
+    <main className="concept-page market-page">
       <PrototypeNav current="marketplace" />
-      <section className="marketplace-top">
-        <div>
-          <span className="eyebrow">C안 · 상품몰형</span>
-          <h1>출발일과 가격을 빠르게 비교하는 여행상품 목록</h1>
-          <p>상품 수가 많아질 때도 고객이 지역, 기간, 상태, 가격을 빠르게 훑어볼 수 있는 구조입니다.</p>
-        </div>
-        <ConsultationCTA title="원하는 조건을 못 찾으셨나요?" />
-      </section>
-      <section className="market-controls" aria-label="상품 검색과 필터">
-        <label>
-          <Search size={18} aria-hidden="true" />
-          <input type="search" placeholder="지역, 상품명, 출발월 검색" />
-        </label>
-        <div className="filter-pills">
-          <Filter size={18} aria-hidden="true" />
-          {categories.map((category) => (
-            <button key={category} type="button">
-              {category}
+      <section className="market-shell">
+        <aside className="market-filter">
+          <h1>여행상품 찾기</h1>
+          <label>
+            <Search size={18} aria-hidden="true" />
+            <input type="search" placeholder="지역, 상품명 검색" />
+          </label>
+          <div>
+            <strong>조건 필터</strong>
+            {filters.map((filter) => (
+              <button key={filter} type="button">
+                <Filter size={15} aria-hidden="true" />
+                {filter}
+              </button>
+            ))}
+          </div>
+          <a href={`tel:${agencyInfo.phone}`} className="market-phone">
+            조건 상담 {agencyInfo.phone}
+          </a>
+        </aside>
+
+        <section className="market-results">
+          <div className="market-toolbar">
+            <div>
+              <span className="eyebrow">C안 · 상품몰형</span>
+              <h2>가격, 날짜, 상태를 한 화면에서 비교</h2>
+            </div>
+            <button type="button">
+              <SlidersHorizontal size={18} aria-hidden="true" />
+              보기 설정
             </button>
-          ))}
-        </div>
+          </div>
+
+          <div className="market-comparison">
+            {sampleProducts.concat(sampleProducts).map((product, index) => (
+              <article key={`${product.id}-${index}`}>
+                <img src={product.image} alt={`${product.title} 이미지`} />
+                <div className="market-product-body">
+                  <div>
+                    <span className={`status-badge ${product.status}`}>{product.status}</span>
+                    <h3>{product.title}</h3>
+                    <p>{product.region}</p>
+                  </div>
+                  <dl>
+                    <div>
+                      <dt>출발</dt>
+                      <dd>{product.departure}</dd>
+                    </div>
+                    <div>
+                      <dt>기간</dt>
+                      <dd>{product.duration}</dd>
+                    </div>
+                    <div>
+                      <dt>가격</dt>
+                      <dd>{product.price}</dd>
+                    </div>
+                  </dl>
+                  <a href="#kakao">
+                    <CalendarDays size={17} aria-hidden="true" />
+                    출발 가능 문의
+                  </a>
+                </div>
+              </article>
+            ))}
+          </div>
+        </section>
       </section>
-      <section className="market-list">
-        {sampleProducts.concat(sampleProducts.slice(0, 2)).map((product, index) => (
-          <ProductCard key={`${product.id}-${index}`} product={product} compact />
-        ))}
-      </section>
-      <ProductDetailPreview product={sampleProducts[2]} heading="목록에서 이어지는 상세 구성" />
-      <TrustFooter />
     </main>
   )
 }
