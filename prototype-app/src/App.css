@@ -464,6 +464,14 @@ p {
   padding: 12px;
   border: 1px solid #e2e8ee;
   border-radius: 6px;
+  text-align: left;
+  background: #fff;
+  cursor: pointer;
+}
+
+.trust-table-row.selected {
+  border-color: #174a42;
+  box-shadow: inset 4px 0 0 #174a42;
 }
 
 .trust-table-row small {
@@ -503,6 +511,59 @@ p {
   padding: 14px;
   border-radius: 6px;
   background: #f7faf8;
+}
+
+.trust-ops {
+  display: grid;
+  grid-template-columns: 0.85fr 1.15fr;
+  gap: 14px;
+}
+
+.trust-admin-panel,
+.trust-preview-panel {
+  display: grid;
+  gap: 12px;
+  padding: 20px;
+  border: 1px solid #d8e2dc;
+  border-radius: 8px;
+  background: #fff;
+}
+
+.trust-admin-panel label {
+  display: grid;
+  gap: 6px;
+  color: #4b5b56;
+  font-size: 14px;
+  font-weight: 900;
+}
+
+.trust-admin-panel select,
+.guide-note select {
+  min-height: 42px;
+  padding: 0 10px;
+  border: 1px solid #d7ded9;
+  border-radius: 8px;
+  background: #fff;
+  font: inherit;
+}
+
+.trust-admin-panel p,
+.trust-preview-panel p {
+  margin: 0;
+  color: #667482;
+  line-height: 1.55;
+}
+
+.trust-preview-panel h2 {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+}
+
+.trust-preview-panel a {
+  width: fit-content;
+  color: #174a42;
+  font-weight: 900;
 }
 
 .trust-detail-grid span {
@@ -645,6 +706,78 @@ p {
   margin-bottom: 36px;
 }
 
+.premium-builder {
+  width: min(1200px, calc(100% - 40px));
+  display: grid;
+  grid-template-columns: 0.85fr 1fr 0.9fr;
+  gap: 18px;
+  align-items: stretch;
+  margin: 24px auto 0;
+  padding: 26px;
+  border: 1px solid #eaded3;
+  border-radius: 8px;
+  background: #fff;
+  box-shadow: 0 14px 38px rgba(29, 38, 48, 0.07);
+}
+
+.premium-builder p,
+.premium-itinerary-preview p {
+  color: #665c52;
+  line-height: 1.65;
+}
+
+.premium-controls {
+  display: grid;
+  gap: 14px;
+}
+
+.premium-controls fieldset {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+  margin: 0;
+  padding: 14px;
+  border: 1px solid #eaded3;
+  border-radius: 8px;
+}
+
+.premium-controls legend {
+  padding: 0 6px;
+  color: #8a5d42;
+  font-weight: 900;
+}
+
+.premium-controls button,
+.market-product-body button {
+  min-height: 38px;
+  padding: 0 12px;
+  border: 1px solid #d8c8bb;
+  border-radius: 999px;
+  background: #fff;
+  font-weight: 900;
+}
+
+.premium-controls button.active {
+  color: #fff;
+  background: #9b5a3c;
+  border-color: #9b5a3c;
+}
+
+.premium-itinerary-preview {
+  display: grid;
+  gap: 10px;
+  align-content: center;
+  padding: 18px;
+  border-radius: 8px;
+  background: #fbf4ec;
+}
+
+.premium-itinerary-preview a {
+  width: fit-content;
+  color: #9b5a3c;
+  font-weight: 900;
+}
+
 .premium-gallery article {
   overflow: hidden;
   border: 1px solid #eaded3;
@@ -729,6 +862,12 @@ p {
   border-radius: 999px;
   background: #f8fcfd;
   font-weight: 900;
+}
+
+.market-filter button.active {
+  color: #fff;
+  background: #1d6f8f;
+  border-color: #1d6f8f;
 }
 
 .market-phone {
@@ -834,6 +973,38 @@ p {
   background: #1d6f8f;
 }
 
+.market-product-body button {
+  color: #1d6f8f;
+  border-color: #b6d5e2;
+}
+
+.market-compare-dock {
+  position: sticky;
+  bottom: 12px;
+  z-index: 5;
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+  align-items: center;
+  padding: 14px;
+  border: 1px solid #c9dce4;
+  border-radius: 8px;
+  background: rgba(255, 255, 255, 0.95);
+  box-shadow: 0 14px 38px rgba(29, 38, 48, 0.1);
+}
+
+.market-compare-dock strong {
+  color: #1d6f8f;
+}
+
+.market-compare-dock span {
+  padding: 5px 9px;
+  border-radius: 999px;
+  background: #eaf6f8;
+  font-size: 14px;
+  font-weight: 900;
+}
+
 .consult-page {
   background: #fff4f6;
 }
@@ -905,6 +1076,15 @@ p {
   background: #b24b5d;
 }
 
+.consult-submit-message {
+  margin: 0;
+  padding: 12px;
+  border-radius: 8px;
+  color: #7a2a3d;
+  background: #fff0f2;
+  line-height: 1.55;
+}
+
 .consult-proof {
   display: grid;
   grid-template-columns: repeat(4, minmax(0, 1fr));
@@ -972,6 +1152,52 @@ p {
   background: #b24b5d;
 }
 
+.consult-admin-flow {
+  width: min(1200px, calc(100% - 40px));
+  margin: 0 auto 40px;
+  padding: 22px;
+  border-radius: 8px;
+  background: #fff;
+  box-shadow: 0 14px 38px rgba(29, 38, 48, 0.08);
+}
+
+.consult-admin-flow h2 {
+  margin-bottom: 14px;
+}
+
+.consult-admin-flow div {
+  display: grid;
+  grid-template-columns: 80px 1fr 1fr auto;
+  gap: 12px;
+  align-items: center;
+  padding: 14px;
+  border: 1px solid #ead3d8;
+  border-radius: 8px;
+}
+
+.consult-admin-flow span {
+  width: fit-content;
+  padding: 5px 9px;
+  border-radius: 999px;
+  color: #fff;
+  background: #b24b5d;
+  font-weight: 900;
+}
+
+.consult-admin-flow small {
+  color: #687783;
+}
+
+.consult-admin-flow button {
+  min-height: 40px;
+  padding: 0 12px;
+  border: 0;
+  border-radius: 8px;
+  color: #fff;
+  background: #7a2a3d;
+  font-weight: 900;
+}
+
 .story-page {
   background: #fffaf0;
 }
@@ -1019,15 +1245,29 @@ p {
   margin-top: 18px;
 }
 
-.story-grid article {
+.story-grid article,
+.story-grid button {
   min-height: 260px;
   padding: 22px;
   border: 1px solid #efe1c5;
+  border-radius: 8px;
+  background: #fff;
+  text-align: left;
 }
 
 .story-grid .story-lead {
   color: #fff;
   background: #6c4b1b;
+}
+
+.story-grid button {
+  cursor: pointer;
+  font: inherit;
+}
+
+.story-grid button.active {
+  border-color: #9b6a21;
+  box-shadow: inset 0 0 0 3px #f2d79a;
 }
 
 .story-grid h2 {
@@ -1038,6 +1278,20 @@ p {
 .guide-note p {
   color: #665b4b;
   line-height: 1.65;
+}
+
+.guide-note label {
+  display: grid;
+  gap: 7px;
+  margin-top: 16px;
+  color: #6c4b1b;
+  font-size: 14px;
+  font-weight: 900;
+}
+
+.guide-note strong {
+  display: block;
+  margin-top: 12px;
 }
 
 .story-lead p {
@@ -1066,6 +1320,23 @@ p {
   color: #1f2933;
   background: #fff6e3;
   overflow: hidden;
+}
+
+.related-products article {
+  padding: 18px;
+  border-radius: 8px;
+  background: #fff6e3;
+}
+
+.related-products article span {
+  color: #9b6a21;
+  font-size: 13px;
+  font-weight: 900;
+}
+
+.related-products article p {
+  color: #665b4b;
+  line-height: 1.6;
 }
 
 .related-products img {
@@ -1149,6 +1420,7 @@ p {
 
   .prototype-grid,
   .trust-detail-grid,
+  .trust-ops,
   .consult-big-actions,
   .story-grid,
   .related-products {
@@ -1187,6 +1459,11 @@ p {
 
   .premium-manifesto {
     margin-top: 18px;
+  }
+
+  .premium-builder,
+  .consult-admin-flow div {
+    grid-template-columns: 1fr;
   }
 
   .market-comparison article {

@@ -1,3 +1,4 @@
+import { useState } from 'react'
 import { BookOpenText, MessageCircle, Quote, UserRoundCheck } from 'lucide-react'
 import { PrototypeNav } from '../components/PrototypeNav'
 import { agencyInfo, sampleProducts } from '../data/sampleProducts'
@@ -18,6 +19,10 @@ const stories = [
 ]
 
 export function ContentStory() {
+  const [selectedStory, setSelectedStory] = useState(stories[0])
+  const [featuredProductId, setFeaturedProductId] = useState(sampleProducts[1].id)
+  const featuredProduct = sampleProducts.find((product) => product.id === featuredProductId) ?? sampleProducts[1]
+
   return (
     <main className="concept-page story-page">
       <PrototypeNav current="story" />
@@ -41,31 +46,47 @@ export function ContentStory() {
           <p>고객 후기와 인솔자 설명을 전면에 두어 신뢰를 먼저 쌓습니다.</p>
         </article>
         {stories.map((story) => (
-          <article key={story.title}>
+          <button
+            key={story.title}
+            className={selectedStory.title === story.title ? 'active' : ''}
+            type="button"
+            onClick={() => setSelectedStory(story)}
+          >
             <BookOpenText size={24} aria-hidden="true" />
             <h2>{story.title}</h2>
             <p>{story.text}</p>
-          </article>
+          </button>
         ))}
       </section>
 
       <section className="guide-note">
         <div>
           <UserRoundCheck size={28} aria-hidden="true" />
-          <h2>인솔자 노트</h2>
-          <p>
-            운영자가 자주 글을 쓰지 않아도 유지되도록, 핵심 여행지별 고정 설명과 대표 후기를 조합하는
-            구조입니다.
-          </p>
+          <h2>콘텐츠 운영 mock</h2>
+          <p>{selectedStory.text}</p>
+          <label>
+            연결 상품
+            <select value={featuredProductId} onChange={(event) => setFeaturedProductId(event.target.value)}>
+              {sampleProducts.map((product) => (
+                <option key={product.id} value={product.id}>
+                  {product.title}
+                </option>
+              ))}
+            </select>
+          </label>
+          <strong>현재 연결: {featuredProduct.title}</strong>
         </div>
         <div className="related-products">
-          {sampleProducts.slice(0, 2).map((product) => (
-            <a key={product.id} href="#kakao">
-              <img src={product.image} alt={`${product.title} 이미지`} />
-              <span>{product.category}</span>
-              <strong>{product.title}</strong>
-            </a>
-          ))}
+          <a href="#kakao">
+            <img src={featuredProduct.image} alt={`${featuredProduct.title} 이미지`} />
+            <span>{featuredProduct.category}</span>
+            <strong>{featuredProduct.title}</strong>
+          </a>
+          <article>
+            <span>고객 화면 미리보기</span>
+            <h3>{selectedStory.title}</h3>
+            <p>이 글 하단에 {featuredProduct.title} 상담 버튼이 붙습니다.</p>
+          </article>
         </div>
       </section>
 

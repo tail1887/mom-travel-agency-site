@@ -1,8 +1,16 @@
-import { Bell, Building2, MessageCircle, Phone, ShieldCheck } from 'lucide-react'
+import { useMemo, useState } from 'react'
+import { Bell, Building2, Eye, MessageCircle, Phone, ShieldCheck } from 'lucide-react'
 import { PrototypeNav } from '../components/PrototypeNav'
 import { agencyInfo, sampleProducts } from '../data/sampleProducts'
 
 export function TrustTraditional() {
+  const [selectedId, setSelectedId] = useState(sampleProducts[0].id)
+  const [statusOverride, setStatusOverride] = useState('출발확정')
+  const selectedProduct = useMemo(
+    () => sampleProducts.find((product) => product.id === selectedId) ?? sampleProducts[0],
+    [selectedId],
+  )
+
   return (
     <main className="concept-page trust-page">
       <PrototypeNav current="trust" />
@@ -69,8 +77,16 @@ export function TrustTraditional() {
                 <span>가격</span>
               </div>
               {sampleProducts.map((product) => (
-                <article key={product.id} className="trust-table-row" role="row">
-                  <span className={`status-badge ${product.status}`}>{product.status}</span>
+                <button
+                  key={product.id}
+                  className={`trust-table-row ${product.id === selectedId ? 'selected' : ''}`}
+                  role="row"
+                  type="button"
+                  onClick={() => setSelectedId(product.id)}
+                >
+                  <span className={`status-badge ${product.id === selectedId ? statusOverride : product.status}`}>
+                    {product.id === selectedId ? statusOverride : product.status}
+                  </span>
                   <div>
                     <strong>{product.title}</strong>
                     <small>{product.region}</small>
@@ -78,15 +94,53 @@ export function TrustTraditional() {
                   <span>{product.departure}</span>
                   <span>{product.duration}</span>
                   <strong>{product.price}</strong>
-                </article>
+                </button>
               ))}
+            </div>
+          </section>
+
+          <section className="trust-ops">
+            <div className="trust-admin-panel">
+              <h2>운영자 빠른 수정 mock</h2>
+              <label>
+                선택 상품
+                <select value={selectedId} onChange={(event) => setSelectedId(event.target.value)}>
+                  {sampleProducts.map((product) => (
+                    <option key={product.id} value={product.id}>
+                      {product.title}
+                    </option>
+                  ))}
+                </select>
+              </label>
+              <label>
+                출발 상태
+                <select value={statusOverride} onChange={(event) => setStatusOverride(event.target.value)}>
+                  <option>모집중</option>
+                  <option>출발확정</option>
+                  <option>마감임박</option>
+                  <option>숨김</option>
+                </select>
+              </label>
+              <p>실제 개발에서는 이 영역이 관리자 상품 수정 화면으로 확장됩니다.</p>
+            </div>
+            <div className="trust-preview-panel">
+              <h2>
+                <Eye size={20} aria-hidden="true" />
+                고객 화면 미리보기
+              </h2>
+              <strong>{selectedProduct.title}</strong>
+              <span className={`status-badge ${statusOverride}`}>{statusOverride}</span>
+              <p>
+                {selectedProduct.departure} · {selectedProduct.duration} · {selectedProduct.price}
+              </p>
+              <a href="#kakao">이 상태로 상담 버튼 노출</a>
             </div>
           </section>
 
           <section className="trust-detail">
             <h2>상품 상세는 일정표처럼 읽히게</h2>
             <div className="trust-detail-grid">
-              {sampleProducts[0].itinerary.map((item, index) => (
+              {selectedProduct.itinerary.map((item, index) => (
                 <article key={item}>
                   <span>{index + 1}일차</span>
                   <p>{item}</p>
